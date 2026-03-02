@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+</head>
+<body>
+
+<!-- user enters credentials to authenticate -->
+<div class="container">
+  <!-- Section header -->
+  <h2>Login</h2>
+
+  <!-- Email input -->
+  <input type="email" id="email" placeholder="Email"><br>
+  <!-- Password input -->
+  <input type="password" id="password" placeholder="Password"><br>
+
+  <!-- Trigger authentication -->
+  <button id="loginBtn">Login</button>
+
+  <!-- Success or error message -->
+  <p id="message"></p>
+
+  <br>
+  <!-- Navigation back to home -->
+  <button onclick="location.href='index.html'">Back</button>
+</div>
+
+<!-- Authentication script: imports `login` and handles click -->
+<script type="module">
+import { login } from "./auth.js";
+
+document.getElementById("loginBtn").onclick = async ()=>{
+  // read inputs
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  try{
+    // attempt login using shared auth module
+    await login(email,pass);
+    document.getElementById("message").innerText="Login successful";
+    setTimeout(()=>location.href="menufile.html",1000);
+  }catch(err){
+    // show error message 
+    document.getElementById("message").innerText=err.message;
+  }
+};
+</script>
+
+</body>
+</html>

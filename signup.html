@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+</div>
+
+<!-- Create a new user account -->
+<div class="container">
+  <!-- Section header -->
+  <h2>Create Account</h2>
+
+  <!-- Email input -->
+  <input type="email" id="email" placeholder="Email"><br>
+  <!-- Password input -->
+  <input type="password" id="password" placeholder="Password"><br>
+
+  <!-- Create account button -->
+  <button id="signupBtn">Sign Up</button>
+
+  <!-- Success or error message -->
+  <p id="message"></p>
+
+  <br>
+  <!-- Back to main page -->
+  <button onclick="location.href='index.html'">Back</button>
+</div>
+
+<script type="module">
+import { signup } from "./auth.js";
+
+document.getElementById("signupBtn").onclick = async ()=>{
+  // Read input values
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  try{
+    // Call shared auth module to create an account
+    await signup(email,pass);
+    document.getElementById("message").innerText="Account created!";
+  }catch(err){
+    // Display error message to user
+    document.getElementById("message").innerText=err.message;
+  }
+};
+</script>
+
+</body>
+</html>
