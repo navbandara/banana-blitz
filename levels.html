@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Levels</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Main container for levels selection -->
+<div class="container">
+  <!-- Page title -->
+  <h2>Select Difficulty</h2>
+
+  <!-- Level buttons with time limits -->
+  <button onclick="location.href='easy.html'">Easy (60s)</button>
+  <button onclick="location.href='moderate.html'">Moderate (40s)</button>
+  <button onclick="location.href='hard.html'">Hard (20s)</button>
+
+  <br><br>
+  <!-- Back button -->
+  <button onclick="location.href='menufile.html'">Back</button>
+</div>
+
+<!-- Module script for authentication -->
+<script type="module">
+  // Import authentication check function from auth module
+  import { requireAuth } from "./auth.js";
+  
+  // Verify user before showing level selection
+  requireAuth();
+</script>
+
+</body>
+</html>

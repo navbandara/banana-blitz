@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Main Menu</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Main container for menu content -->
+<div class="container">
+  <!-- Page title -->
+  <h2>Main Menu</h2>
+
+  <!-- Navigation buttons -->
+  <button onclick="location.href='levels.html'">Play</button>
+  <button onclick="location.href='leaderboard.html'">Leaderboard</button>
+  <button onclick="location.href='howtoplay.html'">Instructions</button>
+
+  <br><br>
+
+  <!-- Logout button -->
+  <button id="logoutBtn">Logout</button>
+</div>
+
+<!-- Module script for authentication and logout -->
+<script type="module">
+  // Import authentication functions from auth module
+  import { requireAuth, logout } from "./auth.js";
+  
+  // Verify user before showing menu
+  requireAuth();
+
+  document.getElementById("logoutBtn").onclick=logout;
+</script>
+
+</body>
+</html>
