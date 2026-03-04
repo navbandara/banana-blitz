@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Page title -->
+  <title>Score</title>
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Title of the score page -->
+  <h2>Your Final Score</h2>
+  <h1 id="finalScore"></h1>
+
+  <!-- Back button to navigate to the main menu -->
+  <button onclick="location.href='menufile.html'">Back</button>
+</div>
+
+<script>
+document.getElementById("finalScore").innerText =
+  localStorage.getItem("lastScore") || 0;
+</script>
+
+</body>
+</html>
