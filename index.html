@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Banana Blitz</title>
-  
-  <!-- Link to external CSS file -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <header class="topBrand">
+      <img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Find the Missing Number!</p>
+    </header>
 
-<!-- Main entry page -->
-<div class="container">
-  <!-- Page title -->
-  <h1>🍌 BANANA BLITZ 🍌</h1>
-  <!-- Short description -->
-  <p>Find the Missing Number!</p>
+    <main class="card centerCard">
+      <div class="heroRow">
+        <img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
+        <div class="heroButtons">
+          <button class="btn btn-yellow" id="goLogin">Login</button>
+          <button class="btn btn-orange" id="goSignup">Sign Up</button>
+        </div>
+        <img class="heroBanana" src="assets/img/banana.png" alt="Banana">
+      </div>
 
-  <!-- Navigation buttons -->
-  <button onclick="location.href='login.html'">Login</button>
-  <button onclick="location.href='signup.html'">Sign Up</button>
-</div>
+      <p class="hint">
+        Tip: Use the keypad to enter <b>0–9</b> and press <b>Submit</b>.
+      </p>
+    </main>
+  </div>
 
+  <script type="module" src="app.js"></script>
 </body>
 </html>

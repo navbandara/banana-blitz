@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Instructions</title>
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How To Play - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-<!-- Main container -->
-<div class="container">
-  <!-- Page title -->
-  <h2>Instructions</h2>
-  
-  <!-- Game instructions -->
-  <p>1. Enter a number between 0 to 9</p>
-  <p>2. Press submit button</p>
+    <header class="topBrand small">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Instructions</p>
+    </header>
 
-  <!-- Back button -->
-  <button onclick="location.href='menufile.html'">Back</button>
-</div>
+    <main class="card">
+      <h2 class="h2 center">Instructions</h2>
 
+      <div class="steps">
+        <div class="step">
+          <div class="stepNum">1</div>
+          <div class="stepText">Enter a number between <b>0</b> to <b>9</b></div>
+        </div>
+
+        <div class="step">
+          <div class="stepNum">2</div>
+          <div class="stepText">Press the <b>Submit</b> button after enter the number</div>
+        </div>
+      </div>
+
+      <div class="rowBtns">
+        <button class="btn btn-dark" onclick="location.href='menufile.html'">Back</button>
+        <button class="btn btn-green" onclick="location.href='levels.html'">Play</button>
+      </div>
+    </main>
+  </div>
 </body>
 </html>

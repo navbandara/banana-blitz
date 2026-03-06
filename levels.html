@@ -1,35 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Levels</title>
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Levels - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-<!-- Main container for levels selection -->
-<div class="container">
-  <!-- Page title -->
-  <h2>Select Difficulty</h2>
+    <header class="topBrand small">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Select your difficulty</p>
+    </header>
 
-  <!-- Level buttons with time limits -->
-  <button onclick="location.href='easy.html'">Easy (60s)</button>
-  <button onclick="location.href='moderate.html'">Moderate (40s)</button>
-  <button onclick="location.href='hard.html'">Hard (20s)</button>
+    <main class="levelsGrid">
+      <div class="levelCard green">
+        <h3>Easy</h3>
+        <p>Time: <b>60s</b></p>
+        <button class="btn btn-green full" data-level="easy">Start</button>
+      </div>
 
-  <br><br>
-  <!-- Back button -->
-  <button onclick="location.href='menufile.html'">Back</button>
-</div>
+      <div class="levelCard orange">
+        <h3>Moderate</h3>
+        <p>Time: <b>40s</b></p>
+        <button class="btn btn-orange full" data-level="moderate">Start</button>
+      </div>
 
-<!-- Module script for authentication -->
-<script type="module">
-  // Import authentication check function from auth module
-  import { requireAuth } from "./auth.js";
-  
-  // Verify user before showing level selection
-  requireAuth();
-</script>
+      <div class="levelCard red">
+        <h3>Hard</h3>
+        <p>Time: <b>20s</b></p>
+        <button class="btn btn-red full" data-level="hard">Start</button>
+      </div>
+    </main>
+  </div>
 
+  <script type="module" src="app.js"></script>
 </body>
 </html>

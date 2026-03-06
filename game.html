@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" id="backBtn">←</button>
+
+    <header class="gameTop">
+      <div class="pill" id="modePill">Mode</div>
+      <div class="timerPill">⏱ <span id="timer">0</span></div>
+    </header>
+
+    <main class="gameArea card">
+      <h2 class="h2 center" id="questionText">Loading...</h2>
+
+      <div class="answerBox">
+        <input class="input answerInput" id="answerInput" type="text" maxlength="1" placeholder="0" readonly>
+      </div>
+
+      <div class="keypad" id="keypad"></div>
+
+      <button class="btn btn-green full" id="submitBtn">Submit ✅</button>
+
+      <p class="msg center" id="feedback"></p>
+    </main>
+
+    <div class="bottomDecor">
+      <img src="assets/img/monkey.png" class="decorMonkey" alt="">
+      <img src="assets/img/banana.png" class="decorBanana" alt="">
+    </div>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>

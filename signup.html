@@ -1,53 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='index.html'">←</button>
 
-<div class="container">
-</div>
+    <header class="topBrand small">
+      <img class="logo smallLogo" src="assets/img/logo.png" alt="Logo">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Create a free account</p>
+    </header>
 
-<!-- Create a new user account -->
-<div class="container">
-  <!-- Section header -->
-  <h2>Create Account</h2>
+    <main class="card formCard">
+      <label class="label">Username</label>
+      <input class="input" id="username" type="text" placeholder="Your name" />
 
-  <!-- Email input -->
-  <input type="email" id="email" placeholder="Email"><br>
-  <!-- Password input -->
-  <input type="password" id="password" placeholder="Password"><br>
+      <label class="label">Email</label>
+      <input class="input" id="email" type="email" placeholder="your@email.com" />
 
-  <!-- Create account button -->
-  <button id="signupBtn">Sign Up</button>
+      <label class="label">Password</label>
+      <input class="input" id="password" type="password" placeholder="••••••••" />
 
-  <!-- Success or error message -->
-  <p id="message"></p>
+      <button class="btn btn-orange full" id="signupBtn">Sign Up</button>
 
-  <br>
-  <!-- Back to main page -->
-  <button onclick="location.href='index.html'">Back</button>
-</div>
+      <p class="smallText">
+        Already have an account? <a href="login.html">Login</a>
+      </p>
 
-<script type="module">
-import { signup } from "./auth.js";
+      <p class="msg" id="message"></p>
+    </main>
+  </div>
 
-document.getElementById("signupBtn").onclick = async ()=>{
-  // Read input values
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
-
-  try{
-    // Call shared auth module to create an account
-    await signup(email,pass);
-    document.getElementById("message").innerText="Account created!";
-  }catch(err){
-    // Display error message to user
-    document.getElementById("message").innerText=err.message;
-  }
-};
-</script>
-
+  <script type="module" src="auth.js"></script>
 </body>
 </html>

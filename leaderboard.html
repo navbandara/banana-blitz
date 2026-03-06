@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <!-- Tab title -->
-  <title>Leaderboard</title>
-
-  <!-- External CSS link -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-<div class="container">
-  <!-- Header for the leaderboard -->
-  <h2>Leader Board</h2>
+    <header class="topBrand small">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Leaderboard</p>
+    </header>
 
-  <!-- Dynamic list populated with top player scores -->
-  <div id="leaderList"></div>
+    <main class="card">
+      <div class="tableHead">
+        <span>Rank</span>
+        <span>Player</span>
+        <span>Score</span>
+      </div>
+      <div id="leaderboardList" class="tableBody"></div>
+      <p class="msg center" id="lbMsg"></p>
+    </main>
+  </div>
 
-  <!-- Back button -->
-  <button onclick="location.href='menufile.html'">Back</button>
-</div>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>

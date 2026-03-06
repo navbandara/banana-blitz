@@ -1,58 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
-
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='index.html'">←</button>
 
-<div class="container">
-</head>
-<body>
+    <header class="topBrand small">
+      <img class="logo smallLogo" src="assets/img/logo.png" alt="Logo">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Login to your account</p>
+    </header>
 
-<!-- user enters credentials to authenticate -->
-<div class="container">
-  <!-- Section header -->
-  <h2>Login</h2>
+    <main class="card formCard">
+      <label class="label">Email</label>
+      <input class="input" id="email" type="email" placeholder="your@email.com" />
 
-  <!-- Email input -->
-  <input type="email" id="email" placeholder="Email"><br>
-  <!-- Password input -->
-  <input type="password" id="password" placeholder="Password"><br>
+      <label class="label">Password</label>
+      <input class="input" id="password" type="password" placeholder="••••••••" />
 
-  <!-- Trigger authentication -->
-  <button id="loginBtn">Login</button>
+      <button class="btn btn-yellow full" id="loginBtn">Login</button>
 
-  <!-- Success or error message -->
-  <p id="message"></p>
+      <p class="smallText">
+        New here? <a href="signup.html">Create Account</a>
+      </p>
 
-  <br>
-  <!-- Navigation back to home -->
-  <button onclick="location.href='index.html'">Back</button>
-</div>
+      <p class="msg" id="message"></p>
+    </main>
+  </div>
 
-<!-- Authentication script: imports `login` and handles click -->
-<script type="module">
-import { login } from "./auth.js";
-
-document.getElementById("loginBtn").onclick = async ()=>{
-  // read inputs
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
-
-  try{
-    // attempt login using shared auth module
-    await login(email,pass);
-    document.getElementById("message").innerText="Login successful";
-    setTimeout(()=>location.href="menufile.html",1000);
-  }catch(err){
-    // show error message 
-    document.getElementById("message").innerText=err.message;
-  }
-};
-</script>
-
+  <script type="module" src="auth.js"></script>
 </body>
 </html>

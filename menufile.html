@@ -1,38 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Main Menu</title>
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" id="backBtn">←</button>
 
-<!-- Main container for menu content -->
-<div class="container">
-  <!-- Page title -->
-  <h2>Main Menu</h2>
+    <header class="topBar">
+      <div class="userBox">
+        <span id="userName">Player</span>
+        <button class="btn btn-dark smallBtn" id="logoutBtn">Logout</button>
+      </div>
+    </header>
 
-  <!-- Navigation buttons -->
-  <button onclick="location.href='levels.html'">Play</button>
-  <button onclick="location.href='leaderboard.html'">Leaderboard</button>
-  <button onclick="location.href='howtoplay.html'">Instructions</button>
+    <header class="topBrand small">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Main Menu</p>
+    </header>
 
-  <br><br>
+    <main class="card centerCard">
+      <button class="btn btn-orange full" onclick="location.href='levels.html'">Play</button>
+      <button class="btn btn-blue full" onclick="location.href='howtoplay.html'">Instructions</button>
+      <button class="btn btn-green full" onclick="location.href='leaderboard.html'">Leaderboard</button>
+      <button class="btn btn-yellow full" onclick="location.href='score.html'">My Score</button>
+    </main>
 
-  <!-- Logout button -->
-  <button id="logoutBtn">Logout</button>
-</div>
+    <div class="bottomDecor">
+      <img src="assets/img/monkey.png" class="decorMonkey" alt="">
+      <img src="assets/img/banana.png" class="decorBanana" alt="">
+    </div>
+  </div>
 
-<!-- Module script for authentication and logout -->
-<script type="module">
-  // Import authentication functions from auth module
-  import { requireAuth, logout } from "./auth.js";
-  
-  // Verify user before showing menu
-  requireAuth();
-
-  document.getElementById("logoutBtn").onclick=logout;
-</script>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>

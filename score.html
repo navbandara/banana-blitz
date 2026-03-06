@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-  <!-- Page title -->
-  <title>Score</title>
-
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Score - Banana Blitz</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="bg">
+  <div class="page">
+    <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-<div class="container">
+    <header class="topBrand small">
+      <h1 class="title">BANANA <span>BLITZ</span></h1>
+      <p class="subtitle">Your Score</p>
+    </header>
 
-  <!-- Title of the score page -->
-  <h2>Your Final Score</h2>
-  <h1 id="finalScore"></h1>
+    <main class="card centerCard">
+      <h2 class="h2">Final Score</h2>
+      <div class="bigScore" id="finalScore">0</div>
 
-  <!-- Back button to navigate to the main menu -->
-  <button onclick="location.href='menufile.html'">Back</button>
-</div>
+      <div class="rowBtns">
+        <button class="btn btn-dark" onclick="location.href='menufile.html'">Back to Menu</button>
+        <button class="btn btn-green" onclick="location.href='levels.html'">Play Again</button>
+      </div>
 
-<script>
-document.getElementById("finalScore").innerText =
-  localStorage.getItem("lastScore") || 0;
-</script>
+      <p class="smallText">Your score is saved to the leaderboard.</p>
+    </main>
+  </div>
 
+  <script type="module" src="app.js"></script>
 </body>
 </html>
