@@ -38,6 +38,51 @@
     document.getElementById('goSignup').addEventListener('click', () => {
       location.href = 'signup.html';
     });
+
+    /* ---------------- SOUND SYSTEM ---------------- */
+
+const sounds = {
+  click: new Audio("assets/sfx/click.wav"),
+  correct: new Audio("assets/sfx/correct.mp3"),
+  wrong: new Audio("assets/sfx/wrong.wav"),
+  timeup: new Audio("assets/sfx/timeup.wav")
+};
+
+// play sound function
+function playSound(name){
+  const s = sounds[name];
+
+  if(!s){
+    console.warn("playSound: no such sound", name);
+    return;
+  }
+
+  s.currentTime = 0; // restart sound if clicked fast
+  const promise = s.play();
+
+  if(promise !== undefined){
+    promise.catch(e => {
+      console.warn("audio play failed", name, e);
+    });
+  }
+}
+
+/* ---------------- BUTTON EVENTS ---------------- */
+
+// redirect main page buttons to login and signup pages
+document.getElementById('goLogin').addEventListener('click', () => {
+  playSound("click");   // play sound
+  setTimeout(() => {
+    location.href = 'login.html';
+  }, 150);
+});
+
+document.getElementById('goSignup').addEventListener('click', () => {
+  playSound("click");   // play sound
+  setTimeout(() => {
+    location.href = 'signup.html';
+  }, 150);
+});
   </script>
 </body>
 </html>

@@ -11,11 +11,16 @@ const sounds = {
 // play a sound by name; resets playback so it can be replayed quickly
 export function playSound(name){
   const s = sounds[name];
-  if(!s) return; // no such sound registered
-  try{
-    s.currentTime = 0;
-    s.play();
-  }catch(e){
-    // ignore errors thrown if browser prevents autoplay
+  if(!s){
+    console.warn("playSound: no such sound", name);
+    return; // no such sound registered
+  }
+  console.log("playSound called for", name, s);
+  s.currentTime = 0;
+  const promise = s.play();
+  if(promise && promise.catch){
+    promise.catch(e => {
+      console.warn("audio play failed", name, e);
+    });
   }
 }
