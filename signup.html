@@ -7,15 +7,20 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
+  <!-- The main container -->
   <div class="page">
+    
+    <!-- Go back arrow -->
     <button class="backBtn" onclick="location.href='index.html'">←</button>
 
+    <!-- The smaller logo & title up top -->
     <header class="topBrand small">
       <img class="logo smallLogo" src="assets/img/logo.png" alt="Logo">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Create a free account</p>
     </header>
 
+    <!-- The actual sign up box -->
     <main class="card formCard">
       <label class="label">Username</label>
       <input class="input" id="username" type="text" placeholder="Your name" />
@@ -35,10 +40,12 @@
         Already have an account? <a href="login.html">Login</a>
       </p>
 
+      <!-- Where error messages show up -->
       <p class="msg" id="message"></p>
     </main>
   </div>
 
   <script type="module" src="auth.js"></script>
+  
 </body>
 </html>

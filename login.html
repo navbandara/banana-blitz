@@ -7,21 +7,26 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
+  <!-- The main container -->
   <div class="page">
+    
+    <!-- Go back arrow -->
     <button class="backBtn" onclick="location.href='index.html'">←</button>
 
+    <!-- The smaller logo & title up top -->
     <header class="topBrand small">
       <img class="logo smallLogo" src="assets/img/logo.png" alt="Logo">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Login to your account</p>
     </header>
 
+    <!-- The actual login box -->
     <main class="card formCard">
       <label class="label">Email</label>
-      <input class="input" id="email" type="email" placeholder="your@email.com" />
+      <input class="input" id="email" type="email" placeholder="your@email.com" value="test@example.com" />
 
       <label class="label">Password</label>
-      <input class="input" id="password" type="password" placeholder="••••••••" />
+      <input class="input" id="password" type="password" placeholder="••••••••" value="password123" />
 
       <button class="btn btn-yellow full" id="loginBtn">Login</button>
 
@@ -29,6 +34,7 @@
         New here? <a href="signup.html">Create Account</a>
       </p>
 
+      <!-- Where error messages get shoved -->
       <p class="msg" id="message"></p>
     </main>
   </div>

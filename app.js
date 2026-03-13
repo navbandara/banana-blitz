@@ -1,10 +1,10 @@
-// app.js - shared script for menu and other authenticated pages
+// app.js - runs on the menu and other pages where the user needs to be logged in
 import { auth } from "./firebase.js";
 import { qs, requireAuth } from "./utils.js";
-import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { playSound } from "./sound.js";
 
-// make sure the user is signed in before showing the menu
+// watch the login state - if they aren't logged in, kick them back to the login screen
 onAuthStateChanged(auth, user => {
   if(!user){
     // not signed in, redirect to login page
@@ -19,7 +19,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-// wire up logout button if present
+// handle the logout button if we're on a page that has one
 const logoutBtn = qs("logoutBtn");
 logoutBtn?.addEventListener("click", async () => {
   playSound("click");
@@ -32,9 +32,39 @@ logoutBtn?.addEventListener("click", async () => {
   }
 });
 
-// optional back button - just go back in history
+
+// super simple back button using the browser's history
 const back = qs("backBtn");
 back?.addEventListener("click", ()=>{
   playSound("click");
   history.back();
+});
+
+// -- level routing --
+// listen to the difficulty level buttons and navigate accordingly
+
+const levelButtons = document.querySelectorAll("[data-level]");
+
+levelButtons.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    playSound("click");
+
+    const level = btn.dataset.level;
+
+    if(level === "easy"){
+      location.href = "easy.html";
+    }
+
+    if(level === "moderate"){
+      location.href = "moderate.html";
+    }
+
+    if(level === "hard"){
+      location.href = "hard.html";
+    }
+
+  });
+
 });

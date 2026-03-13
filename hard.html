@@ -1,84 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Hard Mode - Banana Blitz</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hard Mode - Banana Blitz</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body class="bg">
 
+<!-- The main container -->
 <div class="page">
 
-<button class="backBtn" id="backBtn">←</button>
+    <!-- Go back arrow -->
+    <button class="backBtn" id="backBtn">←</button>
 
-<header class="topBrand small">
+    <!-- The smaller logo & title up top -->
+    <header class="topBrand small">
+        <img src="assets/img/logo.png" class="logo">
+        <h1 class="title">BANANA <span>BLITZ</span></h1>
+        <p class="subtitle">Hard Mode</p>
+    </header>
 
-<img src="assets/img/logo.png" class="logo">
+    <!-- Top info bar with current mode and time left -->
+    <header class="gameTop">
+        <div class="pill" id="modePill">
+            HARD MODE
+        </div>
 
-<h1 class="title">BANANA <span>BLITZ</span></h1>
+        <div class="timerPill">
+            ⏱ <span id="timer">20</span>
+        </div>
+    </header>
 
-<p class="subtitle">Hard Mode</p>
+    <!-- Where the actual game happens -->
+    <main class="card gameArea">
+        <!-- The text prompt -->
+        <h2 class="h2 center" id="questionText">
+            Loading question...
+        </h2>
 
-</header>
+        <!-- Where their answer shows up -->
+        <div class="answerBox">
+            <input
+                class="input answerInput"
+                id="answerInput"
+                type="text"
+                placeholder="0"
+                readonly
+            >
+        </div>
 
+        <!-- The on-screen buttons get injected here -->
+        <div class="keypad" id="keypad"></div>
 
+        <button class="btn btn-green full" id="submitBtn">
+            Submit
+        </button>
 
-<header class="gameTop">
-
-<div class="pill" id="modePill">
-HARD MODE
-</div>
-
-<div class="timerPill">
-⏱ <span id="timer">20</span>
-</div>
-
-</header>
-
-
-
-<main class="card gameArea">
-
-<h2 class="h2 center" id="questionText">
-Loading question...
-</h2>
-
-
-<div class="answerBox">
-
-<input
-class="input answerInput"
-id="answerInput"
-type="text"
-placeholder="0"
-readonly
->
-
-</div>
-
-
-
-<div class="keypad" id="keypad"></div>
-
-
-<button class="btn btn-green full" id="submitBtn">
-Submit
-</button>
-
-
-<p class="msg center" id="feedback"></p>
-
-</main>
+        <!-- Where we tell them right/wrong -->
+        <p class="msg center" id="feedback"></p>
+    </main>
 
 </div>
-
-
 
 <script type="module" src="game.js"></script>
 

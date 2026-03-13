@@ -1,38 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game - Banana Blitz</title>
-  <link rel="stylesheet" href="style.css"/>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Game - Banana Blitz</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body class="bg">
-  <div class="page">
-    <button class="backBtn" id="backBtn">←</button>
 
-    <header class="gameTop">
-      <div class="pill" id="modePill">Mode</div>
-      <div class="timerPill">⏱ <span id="timer">0</span></div>
-    </header>
+<!-- Everything lives in here -->
+<div class="page">
 
-    <main class="gameArea card">
-      <h2 class="h2 center" id="questionText">Loading...</h2>
+<!-- Go back arrow -->
+<button class="backBtn" id="backBtn">←</button>
 
-      <div class="answerBox">
-        <input class="input answerInput" id="answerInput" type="text" maxlength="1" placeholder="0" readonly>
-      </div>
 
-      <div class="keypad" id="keypad"></div>
+<!-- Top bar showing mode and timer -->
+<header class="gameTop">
 
-      <button class="btn btn-green full" id="submitBtn">Submit ✅</button>
+<div class="pill" id="modePill">
+BANANA PUZZLE
+</div>
 
-      <p class="msg center" id="feedback"></p>
-    </main>
+<div class="timerPill">
+⏱ <span id="timer">60</span>
+</div>
 
-    <div class="bottomDecor">
-    </div>
-  </div>
+</header>
 
-  <script type="module" src="game.js"></script>
+
+<!-- The main game box -->
+<main class="gameArea card">
+
+<!-- The prompt at the top -->
+<h2 class="h2 center" id="questionText">
+Solve the Banana Puzzle
+</h2>
+
+
+<!-- The actual puzzle picture -->
+<div class="puzzleBox center">
+
+<img 
+id="bananaImage"
+class="bananaImg"
+src=""
+alt="Banana Puzzle"
+width="260">
+
+</div>
+
+
+<!-- The box where they type their answer -->
+<div class="answerBox">
+
+<input
+class="input answerInput"
+id="answerInput"
+type="text"
+maxlength="1"
+placeholder="0"
+readonly>
+
+</div>
+
+
+<!-- Virtual keypad gets injected here -->
+<div class="keypad" id="keypad"></div>
+
+
+<!-- The submit button -->
+<button class="btn btn-green full" id="submitBtn">
+Submit ✅
+</button>
+
+
+<!-- "Correct!" or "Wrong!" text goes here -->
+<p class="msg center" id="feedback"></p>
+
+
+</main>
+
+</div>
+
+
+<!-- Load up the game logic -->
+<script type="module" src="game.js"></script>
+
 </body>
 </html>

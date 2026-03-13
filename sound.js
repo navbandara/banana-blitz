@@ -1,6 +1,6 @@
-// sound.js - simple sound manager for game effects
+// sound.js - super basic sound player so we don't reload audio files every click
 
-// preload a handful of audio clips mapped by logical names
+// load these up right away
 const sounds = {
   click: new Audio("assets/sfx/click.wav"),
   correct: new Audio("assets/sfx/correct.mp3"),
@@ -8,7 +8,7 @@ const sounds = {
   timeup: new Audio("assets/sfx/timeup.wav"),
 };
 
-// play a sound by name; resets playback so it can be replayed quickly
+// fire off a sound. if it's already playing, restart it immediately
 export function playSound(name){
   const s = sounds[name];
   if(!s){

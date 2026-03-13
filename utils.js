@@ -1,25 +1,33 @@
-// utils.js - common helper functions for the game
+// utils.js - handy little functions we use everywhere
 
-// query selector shortcut: gets element by ID
-export function qs(id){ return document.getElementById(id); }
+// lazy way to grab elements by id
+export function qs(id) {
+  return document.getElementById(id);
+}
 
-// persist a value in localStorage (JSON-encoded)
-export function saveLocal(key, value){
+// dump something into local storage (auto json stringifies)
+export function saveLocal(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-// retrieve a value from localStorage, with optional fallback
-export function loadLocal(key, fallback=null){
-  const v = localStorage.getItem(key);
-  if(!v) return fallback;
-  try { return JSON.parse(v); } catch { return fallback; }
+// yank something out of local storage (auto json parses). falls back if empty or broken
+export function loadLocal(key, fallback = null) {
+  const value = localStorage.getItem(key);
+
+  if (value === null) {
+    return fallback;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
 }
 
-// redirect unauthenticated users to the login page
-export function requireAuth(user){
-  if(!user){
-    alert("Please login first!");
-    // navigate away so protected pages are not shown
+// bounce them to login if they aren't signed in
+export function requireAuth(user) {
+  if (!user) {
     location.href = "login.html";
   }
 }

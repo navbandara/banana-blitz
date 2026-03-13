@@ -1,88 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Banana Blitz</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Banana Blitz</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body class="bg">
-  <div class="page">
-    <header class="topBrand">
-      <img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
-      <h1 class="title">BANANA <span>BLITZ</span></h1>
-      <p class="subtitle">Find the Missing Number!</p>
-    </header>
 
-    <main class="card centerCard">
-      <div class="heroRow">
-        <img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
-        <div class="heroButtons">
-          <button class="btn btn-yellow" id="goLogin">Login</button>
-          <button class="btn btn-orange" id="goSignup">Sign Up</button>
-        </div>
-        <img class="heroBanana" src="assets/img/banana.png" alt="Banana">
-      </div>
+<!-- Everything lives inside here -->
+<div class="page">
 
-      <p class="hint">
-        Tip: Use the keypad to enter <b>0–9</b> and press <b>Submit</b>.
-      </p>
-    </main>
-  </div>
+<!-- Top branding stuff (logo, title) -->
+<header class="topBrand">
+<img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
 
-  <script>
-    // redirect main page buttons to login and signup pages
-    document.getElementById('goLogin').addEventListener('click', () => {
-      location.href = 'login.html';
-    });
-    document.getElementById('goSignup').addEventListener('click', () => {
-      location.href = 'signup.html';
-    });
+<h1 class="title">
+BANANA <span>BLITZ</span>
+</h1>
 
-    /* ---------------- SOUND SYSTEM ---------------- */
+<p class="subtitle">
+Find the Missing Number!
+</p>
+</header>
+
+<!-- The big central box with the monkey and buttons -->
+<main class="card centerCard">
+
+<div class="heroRow">
+
+<!-- Left side monkey -->
+<img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
+
+<!-- The buttons to log in or sign up -->
+<div class="heroButtons">
+
+<button class="btn btn-yellow" id="goLogin">
+Login
+</button>
+
+<button class="btn btn-orange" id="goSignup">
+Sign Up
+</button>
+
+</div>
+
+<!-- Right side banana -->
+<img class="heroBanana" src="assets/img/banana.png" alt="Banana">
+
+</div>
+
+</main>
+
+</div>
+
+
+<script>
+
+// -- sounds --
 
 const sounds = {
-  click: new Audio("assets/sfx/click.wav"),
-  correct: new Audio("assets/sfx/correct.mp3"),
-  wrong: new Audio("assets/sfx/wrong.wav"),
-  timeup: new Audio("assets/sfx/timeup.wav")
+
+click: new Audio("assets/sfx/click.wav"),
+correct: new Audio("assets/sfx/correct.mp3"),
+wrong: new Audio("assets/sfx/wrong.wav"),
+timeup: new Audio("assets/sfx/timeup.wav")
+
 };
 
-// play sound function
+
+// plays our sounds
+
 function playSound(name){
-  const s = sounds[name];
 
-  if(!s){
-    console.warn("playSound: no such sound", name);
-    return;
-  }
+const s = sounds[name];
 
-  s.currentTime = 0; // restart sound if clicked fast
-  const promise = s.play();
-
-  if(promise !== undefined){
-    promise.catch(e => {
-      console.warn("audio play failed", name, e);
-    });
-  }
+if(!s){
+console.warn("Sound not found:", name);
+return;
 }
 
-/* ---------------- BUTTON EVENTS ---------------- */
+s.currentTime = 0;
 
-// redirect main page buttons to login and signup pages
-document.getElementById('goLogin').addEventListener('click', () => {
-  playSound("click");   // play sound
-  setTimeout(() => {
-    location.href = 'login.html';
-  }, 150);
+const promise = s.play();
+
+if(promise !== undefined){
+promise.catch(error => {
+console.warn("Audio play failed:", error);
+});
+}
+
+}
+
+
+// -- button clicks --
+
+const loginBtn = document.getElementById("goLogin");
+const signupBtn = document.getElementById("goSignup");
+
+
+loginBtn.addEventListener("click", () => {
+
+playSound("click");
+
+setTimeout(() => {
+
+location.href = "login.html";
+
+},150);
+
 });
 
-document.getElementById('goSignup').addEventListener('click', () => {
-  playSound("click");   // play sound
-  setTimeout(() => {
-    location.href = 'signup.html';
-  }, 150);
+
+signupBtn.addEventListener("click", () => {
+
+playSound("click");
+
+setTimeout(() => {
+
+location.href = "signup.html";
+
+},150);
+
 });
-  </script>
+
+</script>
+
 </body>
 </html>

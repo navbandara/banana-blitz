@@ -1,4 +1,9 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// firebase.js - sets up and starts the firebase app, then exports what we need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// project details from the firebase console
 const firebaseConfig = {
   apiKey: "AIzaSyD4uVe4DWv8VHMaDnkxJ2GCBx7Vm22-ig8",
   authDomain: "banana-blitz-243ae.firebaseapp.com",
@@ -9,11 +14,9 @@ const firebaseConfig = {
   measurementId: "G-QK9VX0BZ38"
 };
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// Initialize Firebase
+// start it up!
 const app = initializeApp(firebaseConfig);
+
+// grab auth and the database so other files can import them
 export const auth = getAuth(app);
 export const db = getFirestore(app);

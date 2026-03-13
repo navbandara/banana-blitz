@@ -1,4 +1,4 @@
-// auth.js
+// auth.js - handles user sign up and login with firebase
 import { auth, db } from "./firebase.js";
 import { qs } from "./utils.js";
 import { playSound } from "./sound.js";
@@ -6,83 +6,80 @@ import { playSound } from "./sound.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-  doc, setDoc
-} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// debug info to help diagnose load problems
-console.log("auth.js loaded, pathname=", location.pathname);
 
-// attach login handler if the form is present
+console.log("auth.js loaded"); // just making sure this runs
+
+// -- login --
+// handle existing users signing in
+
 const loginBtn = qs("loginBtn");
-if(loginBtn){
-  console.log("found login button, wiring listener");
-  loginBtn.addEventListener("click", async ()=>{
+
+if (loginBtn) {
+
+  loginBtn.addEventListener("click", async () => {
+
     playSound("click");
+
     const email = qs("email").value.trim();
     const password = qs("password").value;
-
     const msg = qs("message");
+
     msg.textContent = "";
 
-    try{
+    try {
+
       await signInWithEmailAndPassword(auth, email, password);
+
       location.href = "menufile.html";
-    }catch(err){
+
+    } catch (err) {
+
       msg.textContent = err.message;
+
     }
+
   });
+
 }
 
-// attach signup handler if the button exists
+
+// -- sign up --
+// handle new folks making an account
+
 const signupBtn = qs("signupBtn");
-if(signupBtn){
-  console.log("found signup button, wiring listener");
-  signupBtn.addEventListener("click", async ()=>{
+
+if (signupBtn) {
+
+  signupBtn.addEventListener("click", async () => {
+
     playSound("click");
+
     const username = qs("username").value.trim();
     const email = qs("email").value.trim();
     const password = qs("password").value;
-
+    const confirm = qs("confirmPassword").value;
     const msg = qs("message");
+
     msg.textContent = "";
 
-    if(username.length < 2){
-      msg.textContent = "Please enter a valid username.";
-      return;
-    }
-
-    if(!email){
-      msg.textContent = "Please enter a valid email address.";
-      return;
-    }
-
-    if(password.length < 6){
-      msg.textContent = "Password must be at least 6 characters.";
-      return;
-    }
-
-    const confirm = qs("confirmPassword").value;
-    if(password !== confirm){
+    if (password !== confirm) {
       msg.textContent = "Passwords do not match.";
       return;
     }
 
-    try{
-      // disable button to prevent double-click
-      signupBtn.disabled = true;
+    try {
 
       const cred = await createUserWithEmailAndPassword(auth, email, password);
 
-      // update auth profile so displayName is available (modular API)
-      await updateProfile(cred.user, { displayName: username });
+      await updateProfile(cred.user, {
+        displayName: username
+      });
 
-      // Save user profile in Firestore
       await setDoc(doc(db, "users", cred.user.uid), {
         username,
         email,
@@ -91,10 +88,13 @@ if(signupBtn){
       });
 
       location.href = "menufile.html";
-    }catch(err){
+
+    } catch (err) {
+
       msg.textContent = err.message;
-    }finally{
-      signupBtn.disabled = false;
+
     }
+
   });
+
 }

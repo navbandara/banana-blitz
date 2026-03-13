@@ -1,9 +1,9 @@
-// game.js
+// game.js - the core game loop, timers, scoring, and UI updates live here
+
 import { auth, db } from "./firebase.js";
 import { qs, loadLocal, saveLocal, requireAuth } from "./utils.js";
 import { playSound } from "./sound.js";
-import { fetchBananaBonus } from "./api.js";
-import { generateQuestion } from "./question-generator.js";
+import { fetchBananaPuzzle } from "./api.js";
 
 import {
   onAuthStateChanged
@@ -20,153 +20,291 @@ const LEVEL_TIME = {
 };
 
 let level = loadLocal("selectedLevel", "easy");
-let timeLeft = LEVEL_TIME[level] ?? 60;
+
+if (!["easy", "moderate", "hard"].includes(level)) {
+  level = "easy";
+}
+
+let timeLeft = LEVEL_TIME[level];
 let score = 0;
 let currentAnswer = 0;
 let timerId = null;
 
-function setModeUI(){
+// -- mode ui --
+// tweak the colors and labels depending on the difficulty
+function setModeUI() {
+
   const pill = qs("modePill");
-  pill.textContent = level.toUpperCase() + " MODE";
 
-  // color hint
-  if(level === "easy") pill.style.background = "#2fb35a";
-  if(level === "moderate") pill.style.background = "#ea6b00";
-  if(level === "hard") pill.style.background = "#e23b3b";
-  pill.style.color = "white";
+  if (pill) {
 
-  qs("timer").textContent = timeLeft;
+    pill.textContent = level.toUpperCase() + " MODE";
+
+    if (level === "easy") pill.style.background = "#2fb35a";
+    if (level === "moderate") pill.style.background = "#ea6b00";
+    if (level === "hard") pill.style.background = "#e23b3b";
+
+    pill.style.color = "white";
+  }
+
+  const timer = qs("timer");
+
+  if (timer) {
+    timer.textContent = timeLeft;
+  }
+
 }
 
-function buildKeypad(){
+// -- keypad --
+// spin up the on-screen number buttons for folks playing on touch/mouse
+function buildKeypad() {
+
   const keypad = qs("keypad");
+  if (!keypad) return;
+
   keypad.innerHTML = "";
 
   const keys = ["1","2","3","4","5","6","7","8","9","0","C","⌫"];
-  keys.forEach(k=>{
+
+  keys.forEach(k => {
+
     const btn = document.createElement("button");
+
     btn.className = "key";
     btn.textContent = k;
 
-    btn.addEventListener("click", ()=>{
-      playSound("click");
-      const input = qs("answerInput");
+    btn.addEventListener("click", () => {
 
-      if(k === "C"){
+      playSound("click");
+
+      const input = qs("answerInput");
+      if (!input) return;
+
+      if (k === "C" || k === "⌫") {
         input.value = "";
         return;
       }
-      if(k === "⌫"){
-        input.value = "";
-        return;
-      }
-      // allow only 1 digit
+
       input.value = k;
+
     });
 
     keypad.appendChild(btn);
+
   });
+
 }
 
-async function loadNewQuestion(){
-  // Interoperability: Banana API bonus fetch (optional)
-  const banana = await fetchBananaBonus();
-  // (We don't show the fact here, but you can show it as bonus message if you want.)
+// -- load banana puzzle --
+// grabs the next puzzle and slaps it onto the screen
+async function loadNewQuestion() {
 
-  const q = generateQuestion(level);
-  qs("questionText").textContent = q.text;
-  currentAnswer = q.answer;
-  qs("answerInput").value = "";
-  qs("feedback").textContent = "";
+  const puzzle = await fetchBananaPuzzle();
+
+  const img = qs("bananaImage");
+  const questionText = qs("questionText");
+  const answerInput = qs("answerInput");
+  const feedback = qs("feedback");
+
+  if (!puzzle.ok) {
+
+    if (questionText)
+      questionText.textContent = "Failed to load puzzle.";
+
+    return;
+
+  }
+
+  if (img) {
+    img.src = puzzle.image;
+  }
+
+  if (questionText) {
+    questionText.textContent = "Solve the Banana Puzzle";
+  }
+
+  currentAnswer = puzzle.answer;
+
+  if (answerInput) answerInput.value = "";
+  if (feedback) feedback.textContent = "";
+
 }
 
-function startTimer(onTimeUp){
+// -- timer --
+// tick tock. fires off a function when the clock runs out
+function startTimer(onTimeUp) {
+
   clearInterval(timerId);
-  timerId = setInterval(()=>{
-    timeLeft--;
-    qs("timer").textContent = timeLeft;
 
-    if(timeLeft <= 0){
-      clearInterval(timerId);
-      playSound("timeup");
-      onTimeUp();
+  timerId = setInterval(() => {
+
+    timeLeft--;
+
+    const timer = qs("timer");
+
+    if (timer) {
+      timer.textContent = timeLeft;
     }
-  }, 1000);
+
+    if (timeLeft <= 0) {
+
+      clearInterval(timerId);
+
+      playSound("timeup");
+
+      onTimeUp();
+
+    }
+
+  },1000);
+
 }
 
-async function saveScoreToDatabase(user){
-  // read username
-  const userSnap = await getDoc(doc(db, "users", user.uid));
-  const u = userSnap.exists() ? userSnap.data() : { username:"Player" };
+// -- save score --
+// shove the final score into firestore, update best score if they beat it
+async function saveScoreToDatabase(user) {
 
-  // Save latest score to scores collection
-  await addDoc(collection(db, "scores"), {
-    uid: user.uid,
-    username: u.username,
+  const userSnap = await getDoc(doc(db,"users",user.uid));
+
+  const u = userSnap.exists()
+    ? userSnap.data()
+    : { username:"Player", bestScore:0 };
+
+  await addDoc(collection(db,"scores"),{
+
+    uid:user.uid,
+    username:u.username || "Player",
     score,
     level,
-    createdAt: Date.now()
+    createdAt:Date.now()
+
   });
 
-  // update bestScore in users if higher
   const best = u.bestScore || 0;
+
   if(score > best){
-    await setDoc(doc(db, "users", user.uid), { ...u, bestScore: score }, { merge:true });
+
+    await setDoc(
+      doc(db,"users",user.uid),
+      { bestScore:score },
+      { merge:true }
+    );
+
   }
+
 }
 
+// -- finish game --
+// game over! save locally so the next page can show it off
 function finishGame(){
-  saveLocal("lastScore", score);
+
+  saveLocal("lastScore",score);
+
   location.href = "score.html";
+
 }
 
+// -- events --
+// hook up the buttons and kick off the timer
 function attachEvents(user){
-  qs("backBtn").addEventListener("click", ()=>{
-    playSound("click");
-    location.href = "levels.html";
-  });
 
-  qs("submitBtn").addEventListener("click", async ()=>{
-    playSound("click");
-    const v = qs("answerInput").value.trim();
-    if(v === ""){
-      qs("feedback").textContent = "Enter a number 0–9.";
-      return;
-    }
+  const backBtn = qs("backBtn");
 
-    const n = Number(v);
+  if(backBtn){
 
-    if(n === currentAnswer){
-      playSound("correct");
-      score += 10;
-      qs("feedback").textContent = `✅ Correct! Score: ${score}`;
-      await loadNewQuestion();
-    }else{
-      playSound("wrong");
-      score = Math.max(0, score - 2);
-      qs("feedback").textContent = `❌ Wrong! Score: ${score}`;
-      // next question still
-      await loadNewQuestion();
-    }
-  });
+    backBtn.addEventListener("click",()=>{
 
-  startTimer(async ()=>{
-    // when time up -> save score -> go score page
+      playSound("click");
+
+      location.href="levels.html";
+
+    });
+
+  }
+
+  const submitBtn = qs("submitBtn");
+
+  if(submitBtn){
+
+    submitBtn.addEventListener("click", async()=>{
+
+      playSound("click");
+
+      const answerInput = qs("answerInput");
+      const feedback = qs("feedback");
+
+      if(!answerInput || !feedback) return;
+
+      const v = answerInput.value.trim();
+
+      if(v === ""){
+
+        feedback.textContent = "Enter a number 0–9.";
+
+        return;
+
+      }
+
+      const n = Number(v);
+
+      if(n === currentAnswer){
+
+        playSound("correct");
+
+        score += 10;
+
+        feedback.textContent = `✅ Correct! Score: ${score}`;
+
+        await loadNewQuestion();
+
+      }else{
+
+        playSound("wrong");
+
+        score = Math.max(0,score - 2);
+
+        feedback.textContent = `❌ Wrong! Score: ${score}`;
+
+        await loadNewQuestion();
+
+      }
+
+    });
+
+  }
+
+  startTimer(async()=>{
+
     try{
+
       await saveScoreToDatabase(user);
+
     }catch(e){
-      // even if fails, show score
+
+      console.error("Score save failed:",e);
+
     }
+
     finishGame();
+
   });
+
 }
 
-onAuthStateChanged(auth, async (user)=>{
+// -- game start --
+// where the magic happens. make sure they are logged in, build UI, and begin!
+onAuthStateChanged(auth, async(user)=>{
+
   requireAuth(user);
 
-  // Setup game
+  if(!user) return;
+
   buildKeypad();
+
   setModeUI();
+
   await loadNewQuestion();
+
   attachEvents(user);
+
 });

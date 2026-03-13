@@ -6,16 +6,25 @@
   <title>Levels - Banana Blitz</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body class="bg">
+
+  <!-- Everything lives in here -->
   <div class="page">
+
+    <!-- Go back arrow -->
     <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
+    <!-- The smaller logo & title up top -->
     <header class="topBrand small">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Select your difficulty</p>
     </header>
 
+    <!-- The grid of difficulty options -->
     <main class="levelsGrid">
+
+      <!-- Easy button -->
       <div class="levelCard green">
         <h3>Easy</h3>
         <p>Time: <b>60s</b></p>
@@ -33,9 +42,27 @@
         <p>Time: <b>20s</b></p>
         <button class="btn btn-red full" data-level="hard">Start</button>
       </div>
+
     </main>
+
   </div>
 
-  <script type="module" src="app.js"></script>
+  <!-- Little script to remember what they clicked and go to the game -->
+  <script>
+    const levelButtons = document.querySelectorAll("[data-level]");
+
+    levelButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const level = button.dataset.level;
+
+        // Save selected level
+        localStorage.setItem("selectedLevel", JSON.stringify(level));
+
+        // Open one game page
+        window.location.href = "game.html";
+      });
+    });
+  </script>
+
 </body>
 </html>
