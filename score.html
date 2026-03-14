@@ -7,26 +7,26 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
-  <!-- Everything lives in here -->
+  <!-- Main layout container for the page content. -->
   <div class="page">
     
-    <!-- Go back arrow -->
+    <!-- Navigates the user back to the main menu. -->
     <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-    <!-- The smaller logo & title up top -->
+    <!-- Displays the compact version of the logo and title. -->
     <header class="topBrand small">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Your Score</p>
     </header>
 
-    <!-- The big box showing their score -->
+    <!-- Container displaying the player's final performance results. -->
     <main class="card centerCard">
       <h2 class="h2">Final Score</h2>
       
-      <!-- The giant number -->
+      <!-- Prominently displays the total points earned during the game. -->
       <div class="bigScore" id="finalScore">0</div>
 
-      <!-- Buttons to play again or go home -->
+      <!-- Navigation options prompting the user's next action. -->
       <div class="rowBtns">
         <button class="btn btn-dark" onclick="location.href='menufile.html'">Back to Menu</button>
         <button class="btn btn-green" onclick="location.href='levels.html'">Play Again</button>
@@ -37,5 +37,6 @@
   </div>
 
   <script type="module" src="app.js"></script>
+<script type="module" src="mute.js"></script>
 </body>
 </html>

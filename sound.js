@@ -1,6 +1,6 @@
-// sound.js - super basic sound player so we don't reload audio files every click
+// This file manages background music and sound effects to prevent redundant loading.
 
-// load these up right away
+// Preloads all game sound effects for immediate playback.
 const sounds = {
   click: new Audio("assets/sfx/click.wav"),
   correct: new Audio("assets/sfx/correct.mp3"),
@@ -8,12 +8,12 @@ const sounds = {
   timeup: new Audio("assets/sfx/timeup.wav"),
 };
 
-// fire off a sound. if it's already playing, restart it immediately
+// Plays a specified sound effect and instantly restarts it if it is already playing.
 export function playSound(name){
   const s = sounds[name];
   if(!s){
     console.warn("playSound: no such sound", name);
-    return; // no such sound registered
+    return; // Returns early if the requested sound does not exist.
   }
   console.log("playSound called for", name, s);
   s.currentTime = 0;
@@ -25,34 +25,48 @@ export function playSound(name){
   }
 }
 
-// Background music setup
+// Variables for managing the background music track.
 let bgMusic = null;
 
-// Use a free API / public domain audio URL
-// Example using a public domain chiptune track from an open source library:
+// The public domain URL used for the background arcade music.
 const BG_MUSIC_URL = "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=8-bit-arcade-138828.mp3"; 
+
+export function isMuted() {
+  return localStorage.getItem("bgMusicMuted") === "true";
+}
+
+export function toggleMute() {
+  const current = isMuted();
+  const newState = !current;
+  localStorage.setItem("bgMusicMuted", newState);
+  if (bgMusic) {
+    bgMusic.muted = newState;
+  }
+  return newState;
+}
 
 export function initBackgroundMusic() {
   if (bgMusic) return;
 
   bgMusic = new Audio(BG_MUSIC_URL);
   bgMusic.loop = true;
-  bgMusic.volume = 0.3; // keep it subtle so the sound effects are louder
+  bgMusic.volume = 0.3; // Lowers the music volume so it does not overpower the sound effects.
+  bgMusic.muted = isMuted();
 
-  // check if we have a saved time in sessionStorage
+  // Resumes background music from its last saved timestamp if available.
   const savedTime = sessionStorage.getItem("bgMusicTime");
   if (savedTime) {
     bgMusic.currentTime = parseFloat(savedTime);
   }
 
-  // Every second, save the current time so it persists across page loads
+  // Saves the current music playback time every second to maintain continuity across pages.
   setInterval(() => {
     if (bgMusic && !bgMusic.paused) {
       sessionStorage.setItem("bgMusicTime", bgMusic.currentTime);
     }
   }, 1000);
 
-  // Play immediately (browsers might block this until user interaction)
+  // Attempts to auto-play background music, handling potential browser restrictions.
   const playPromise = bgMusic.play();
   if (playPromise !== undefined) {
     playPromise.catch(error => {
@@ -61,7 +75,7 @@ export function initBackgroundMusic() {
   }
 }
 
-// Ensure audio plays when the user interacts with the page (fixes autoplay policies)
+// Starts music on the first user interaction to bypass browser auto-play policies.
 document.addEventListener("click", () => {
   if (bgMusic && bgMusic.paused) {
     bgMusic.play().catch(() => {});

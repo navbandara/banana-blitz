@@ -7,20 +7,20 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
-  <!-- The main container -->
+  <!-- Main layout container for the page content. -->
   <div class="page">
     
-    <!-- Go back arrow -->
+    <!-- Navigates the user back to the home page. -->
     <button class="backBtn" onclick="location.href='index.html'">←</button>
 
-    <!-- The smaller logo & title up top -->
+    <!-- Displays the compact version of the logo and title. -->
     <header class="topBrand small">
       <img class="logo smallLogo" src="assets/img/logo.png" alt="Logo">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Login to your account</p>
     </header>
 
-    <!-- The actual login box -->
+    <!-- Form container for user authentication. -->
     <main class="card formCard">
       <label class="label">Email</label>
       <input class="input" id="email" type="email" placeholder="your@email.com" value="test@example.com" />
@@ -34,11 +34,12 @@
         New here? <a href="signup.html">Create Account</a>
       </p>
 
-      <!-- Where error messages get shoved -->
+      <!-- Container for displaying authentication error messages to the user. -->
       <p class="msg" id="message"></p>
     </main>
   </div>
 
   <script type="module" src="auth.js"></script>
+<script type="module" src="mute.js"></script>
 </body>
 </html>

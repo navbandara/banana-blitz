@@ -1,6 +1,6 @@
-/* style.css - all the pretty colors, layouts, and bouncy animations live here */
+/* This file contains all styles, themes, and animations for the application. */
 
-/* -- colors & sizes -- */
+/* Defines global CSS variables for colors, sizing, and transitions. */
 :root{
   --shadow: 0 10px 25px rgba(0,0,0,.25);
   --card: rgba(245,245,245,.78);
@@ -20,7 +20,7 @@
   --btn-grad-dark: linear-gradient(45deg,#2b2b2b,#434343);
 }
 
-/* -- bare bones reset -- */
+/* Applies a basic reset to remove default browser styling discrepancies. */
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; overflow-x:hidden; }
 body, input, button, textarea{ -webkit-font-smoothing: antialiased; }
@@ -29,7 +29,7 @@ body{font-family: 'Segoe UI', Arial, sans-serif; line-height:1.5; color:var(--te
 a{ color:var(--primary); font-weight:700; text-decoration:none; transition: color .2s ease; }
 a:hover{ text-decoration:underline; color:darken(var(--primary),10%); }
 
-/* make the scrollbar look less ugly */
+/* Customizes the browser scrollbar to match the application's aesthetic. */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: rgba(0,0,0,.1); }
 ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 4px; }
@@ -53,7 +53,7 @@ body.bg:after{
   pointer-events:none;
 }
 
-/* -- big layout boxes -- */
+/* Styles for primary layout containers across various pages. */
 .page{
   max-width: 980px;
   margin: 0 auto;
@@ -119,7 +119,7 @@ body.bg:after{
   letter-spacing: .5px;
 }
 
-/* -- ui elements (buttons, inputs, cards) -- */
+/* Styles for reusable interface components like cards, buttons, and inputs. */
 .card{
   margin: 26px auto 0;
   padding: 26px;
@@ -206,7 +206,7 @@ body.bg:after{
 
 .smallBtn{ padding:10px 12px; border-radius:12px; font-size:14px; }
 
-/* -- keyframes (making things wiggle and pop) -- */
+/* Defines CSS animations for dynamic visual effects throughout the app. */
 @keyframes gradientBG{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
@@ -256,9 +256,9 @@ body.bg:after{
 .h2{ margin: 0 0 12px; }
 .center{ text-align:center; }
 
-/* -- page specific styling -- */
+/* Contains customized styles specific to individual pages and sections. */
 
-/* homepage hero */
+/* Hero section styling designed specifically for the index page. */
 .heroRow{
   display:flex;
   align-items:center;
@@ -291,7 +291,7 @@ body.bg:after{
   font-weight:900;
 }
 
-/* difficulty level cards */
+/* Grid layout and card styles for the difficulty selection page. */
 .levelsGrid{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
@@ -326,7 +326,7 @@ body.bg:after{
   margin-top: 14px;
 }
 
-/* main game screen stuff */
+/* Element styling specifically targeted for the main gameplay interface. */
 .gameTop{
   display:flex;
   justify-content:space-evenly;
@@ -402,7 +402,7 @@ body.bg:after{
   animation: titlePop 6s ease-in-out infinite alternate;
 }
 
-/* leaderboard table */
+/* Table layout styles customized for the leaderboard score display. */
 .tableHead, .tableRow{
   display:grid;
   grid-template-columns: 90px 1fr 130px;
@@ -422,7 +422,7 @@ body.bg:after{
 .tableRow:hover{ background: rgba(0,0,0,.04); }
 .tableRow:last-child{ border-bottom:none; }
 
-/* -- mobile tweaks -- */
+/* Media queries to ensure responsive design on mobile devices. */
 @media (max-width: 780px){
   .levelsGrid{ grid-template-columns: 1fr; }
   .heroRow{ flex-direction:column; }
@@ -443,3 +443,28 @@ body.bg:after{
   border-radius:12px;
   box-shadow:0 10px 20px rgba(0,0,0,0.25);
 }
+
+.muteBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--card-alt);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.muteBtn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
+  background: white;
+}

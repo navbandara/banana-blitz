@@ -1,11 +1,11 @@
-// question-generator.js - cooks up random math problems based on how hard they want it
+// This file generates random math problems dynamically based on the selected difficulty level.
 
-// helper to get a random whole number
+// Generates a random integer between the specified minimum and maximum values.
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// spits out a math problem missing a piece, e.g. "5 + ? = 10"
+// Creates a math equation with a missing value for the player to solve based on difficulty.
 export function generateQuestion(level) {
   if (level === "easy") {
     const a = randInt(0, 9);

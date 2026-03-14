@@ -1,13 +1,13 @@
-// api.js - handles all the external data fetching for the game (Banana API & Open Trivia DB)
+// This file manages all external API calls for fetching game puzzles and trivia questions.
 
-// banana puzzle
+// Base URL for fetching banana-related math puzzles.
 const BANANA_API_URL = "https://marcconrad.com/uob/banana/api.php?out=json";
 
-// ping open trivia db for math questions
+// Base URL for fetching random multiple-choice math questions.
 const OPENTDB_MATH =
   "https://opentdb.com/api.php?amount=1&category=19&type=multiple";
 
-// grabs a fresh puzzle, returning the image url and the correct number to solve it
+// Fetches a new banana puzzle and returns its image URL along with the correct numerical answer.
 export async function fetchBananaPuzzle() {
   try {
 
@@ -36,7 +36,7 @@ export async function fetchBananaPuzzle() {
   }
 }
 
-// fetches a puzzle but gives us base64 data directly instead of a link
+// Retrieves a banana puzzle in base64 format instead of a standard image link.
 export async function fetchBananaPuzzleBase64() {
   try {
 
@@ -67,7 +67,7 @@ export async function fetchBananaPuzzleBase64() {
   }
 }
 
-// pulling a bonus puzzle just for fun, includes a little message text
+// Fetches a bonus banana puzzle and includes a fun introductory message.
 export async function fetchBananaBonus() {
   try {
 
@@ -96,7 +96,7 @@ export async function fetchBananaBonus() {
   }
 }
 
-// gets a random multiple choice math question from open trivia db
+// Fetches a random multiple-choice math question from the Open Trivia Database.
 export async function fetchMathMCQ() {
   try {
 

@@ -1,4 +1,4 @@
-// auth.js - handles user sign up and login with firebase
+// This file handles user authentication processes including signing up and logging in.
 import { auth, db } from "./firebase.js";
 import { qs } from "./utils.js";
 import { playSound } from "./sound.js";
@@ -12,10 +12,9 @@ import {
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-console.log("auth.js loaded"); // just making sure this runs
+console.log("auth.js loaded"); // Confirms that the authentication module has loaded successfully.
 
-// -- login --
-// handle existing users signing in
+// Processes sign-in attempts for existing users.
 
 const loginBtn = qs("loginBtn");
 
@@ -48,8 +47,7 @@ if (loginBtn) {
 }
 
 
-// -- sign up --
-// handle new folks making an account
+// Manages account creation for new users.
 
 const signupBtn = qs("signupBtn");
 

@@ -9,22 +9,22 @@
 
 <body class="bg">
 
-  <!-- Everything lives in here -->
+  <!-- Main layout container for the page content. -->
   <div class="page">
 
-    <!-- Go back arrow -->
+    <!-- Navigates the user back to the main menu. -->
     <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-    <!-- The smaller logo & title up top -->
+    <!-- Displays the compact version of the logo and title. -->
     <header class="topBrand small">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Select your difficulty</p>
     </header>
 
-    <!-- The grid of difficulty options -->
+    <!-- Grid layout containing the different difficulty selection cards. -->
     <main class="levelsGrid">
 
-      <!-- Easy button -->
+      <!-- Card for selecting the easy difficulty level. -->
       <div class="levelCard green">
         <h3>Easy</h3>
         <p>Time: <b>60s</b></p>
@@ -47,7 +47,7 @@
 
   </div>
 
-  <!-- Little script to remember what they clicked and go to the game -->
+  <!-- Script to save the selected difficulty level and redirect to the game. -->
   <script>
     const levelButtons = document.querySelectorAll("[data-level]");
 
@@ -55,14 +55,15 @@
       button.addEventListener("click", () => {
         const level = button.dataset.level;
 
-        // Save selected level
+        // Saves the selected level to local storage.
         localStorage.setItem("selectedLevel", JSON.stringify(level));
 
-        // Open one game page
+        // Redirects the user to the active game page.
         window.location.href = "game.html";
       });
     });
   </script>
 
+<script type="module" src="mute.js"></script>
 </body>
 </html>

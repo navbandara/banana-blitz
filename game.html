@@ -13,14 +13,14 @@
 
 <body class="bg">
 
-<!-- Everything lives in here -->
+<!-- Main layout container for the page content. -->
 <div class="page">
 
-<!-- Go back arrow -->
+<!-- Navigates the user back to the main menu or previous page. -->
 <button class="backBtn" id="backBtn">←</button>
 
 
-<!-- Top bar showing mode and timer -->
+<!-- Header displaying the active game mode and remaining time. -->
 <header class="gameTop">
 
 <div class="pill" id="modePill">
@@ -34,16 +34,16 @@ BANANA PUZZLE
 </header>
 
 
-<!-- The main game box -->
+<!-- Central card area containing the active gameplay elements. -->
 <main class="gameArea card">
 
-<!-- The prompt at the top -->
+<!-- Header displaying the current question or loading status. -->
 <h2 class="h2 center" id="questionText">
 Solve the Banana Puzzle
 </h2>
 
 
-<!-- The actual puzzle picture -->
+<!-- Container for rendering the dynamic puzzle image. -->
 <div class="puzzleBox center">
 
 <img 
@@ -56,7 +56,7 @@ width="260">
 </div>
 
 
-<!-- The box where they type their answer -->
+<!-- Read-only input field displaying the currently typed answer. -->
 <div class="answerBox">
 
 <input
@@ -70,17 +70,17 @@ readonly>
 </div>
 
 
-<!-- Virtual keypad gets injected here -->
+<!-- Container where the numeric keypad buttons are dynamically inserted. -->
 <div class="keypad" id="keypad"></div>
 
 
-<!-- The submit button -->
+<!-- Submits the user's current answer for validation. -->
 <button class="btn btn-green full" id="submitBtn">
 Submit ✅
 </button>
 
 
-<!-- "Correct!" or "Wrong!" text goes here -->
+<!-- Field for displaying answer validation feedback to the user. -->
 <p class="msg center" id="feedback"></p>
 
 
@@ -89,8 +89,9 @@ Submit ✅
 </div>
 
 
-<!-- Load up the game logic -->
+<!-- Imports and executes the core game logic module. -->
 <script type="module" src="game.js"></script>
 
+<script type="module" src="mute.js"></script>
 </body>
 </html>

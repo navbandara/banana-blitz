@@ -1,4 +1,4 @@
-// game.js - the core game loop, timers, scoring, and UI updates live here
+// This file contains the core game logic, including timers, scoring, and UI updates.
 
 import { auth, db } from "./firebase.js";
 import { qs, loadLocal, saveLocal, requireAuth } from "./utils.js";
@@ -30,8 +30,7 @@ let score = 0;
 let currentAnswer = 0;
 let timerId = null;
 
-// -- mode ui --
-// tweak the colors and labels depending on the difficulty
+// Updates the user interface colors and labels based on the selected difficulty level.
 function setModeUI() {
 
   const pill = qs("modePill");
@@ -55,8 +54,7 @@ function setModeUI() {
 
 }
 
-// -- keypad --
-// spin up the on-screen number buttons for folks playing on touch/mouse
+// Builds an on-screen numeric keypad for users playing on touch devices or with a mouse.
 function buildKeypad() {
 
   const keypad = qs("keypad");
@@ -95,8 +93,7 @@ function buildKeypad() {
 
 }
 
-// -- load banana puzzle --
-// grabs the next puzzle and slaps it onto the screen
+// Fetches the next banana puzzle from the API and displays it on the screen.
 async function loadNewQuestion() {
 
   const puzzle = await fetchBananaPuzzle();
@@ -130,8 +127,7 @@ async function loadNewQuestion() {
 
 }
 
-// -- timer --
-// tick tock. fires off a function when the clock runs out
+// Starts the countdown timer and executes a callback function when the time expires.
 function startTimer(onTimeUp) {
 
   clearInterval(timerId);
@@ -160,8 +156,7 @@ function startTimer(onTimeUp) {
 
 }
 
-// -- save score --
-// shove the final score into firestore, update best score if they beat it
+// Saves the player's final score to Firestore and updates their personal best if exceeded.
 async function saveScoreToDatabase(user) {
 
   const userSnap = await getDoc(doc(db,"users",user.uid));
@@ -194,8 +189,7 @@ async function saveScoreToDatabase(user) {
 
 }
 
-// -- finish game --
-// game over! save locally so the next page can show it off
+// Handles the end of the game by saving the score locally and redirecting to the score page.
 function finishGame(){
 
   saveLocal("lastScore",score);
@@ -204,8 +198,7 @@ function finishGame(){
 
 }
 
-// -- events --
-// hook up the buttons and kick off the timer
+// Attaches event listeners to game buttons and initializes the gameplay timer.
 function attachEvents(user){
 
   const backBtn = qs("backBtn");
@@ -291,8 +284,7 @@ function attachEvents(user){
 
 }
 
-// -- game start --
-// where the magic happens. make sure they are logged in, build UI, and begin!
+// Initializes the game process by verifying authentication, building the UI, and loading the first puzzle.
 onAuthStateChanged(auth, async(user)=>{
 
   requireAuth(user);

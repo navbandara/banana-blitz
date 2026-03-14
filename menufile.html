@@ -7,29 +7,29 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
-  <!-- Everything in here -->  
+  <!-- Main layout container for the page content. -->  
   <div class="page">
     
-    <!-- The back button -->
+    <!-- Navigates the user back to the previous page. -->
     <button class="backBtn" id="backBtn">←</button>
 
-    <!-- Displays who is logged in -->
+    <!-- Displays the currently logged-in user's information and logout option. -->
     <header class="topBar">
       <div class="userBox">
-        <!-- Shows the current username -->
+        <!-- Displays the current user's display name or email. -->
         <span id="userName">Player</span>
-        <!-- The button to log out -->
+        <!-- Signs the user out of the application upon being clicked. -->
         <button class="btn btn-dark smallBtn" id="logoutBtn">Logout</button>
       </div>
     </header>
 
-    <!-- Small branding block -->
+    <!-- Displays the compact version of the project title. -->
     <header class="topBrand small">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Main Menu</p>
     </header>
 
-    <!-- All the big menu buttons -->
+    <!-- Central card containing the primary navigation options for the game. -->
     <main class="card centerCard">
       <button class="btn btn-orange full" onclick="location.href='levels.html'">Play</button>
       <button class="btn btn-blue full" onclick="location.href='howtoplay.html'">Instructions</button>
@@ -41,5 +41,6 @@
     </div>
   </div>
   <script type="module" src="app.js"></script>
+<script type="module" src="mute.js"></script>
 </body>
 </html>

@@ -12,10 +12,10 @@
 
 <body class="bg">
 
-<!-- Everything lives inside here -->
+<!-- Wrapper container that holds all page content. -->
 <div class="page">
 
-<!-- Top branding stuff (logo, title) -->
+<!-- Displays the game logo and title. -->
 <header class="topBrand">
 <img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
 
@@ -28,15 +28,15 @@ Find the Missing Number!
 </p>
 </header>
 
-<!-- The big central box with the monkey and buttons -->
+<!-- Main central card layout containing the interactive elements. -->
 <main class="card centerCard">
 
 <div class="heroRow">
 
-<!-- Left side monkey -->
+<!-- Displays the monkey mascot on the left. -->
 <img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
 
-<!-- The buttons to log in or sign up -->
+<!-- Contains the navigation buttons for logging in and signing up. -->
 <div class="heroButtons">
 
 <button class="btn btn-yellow" id="goLogin">
@@ -49,7 +49,7 @@ Sign Up
 
 </div>
 
-<!-- Right side banana -->
+<!-- Displays the banana graphic on the right. -->
 <img class="heroBanana" src="assets/img/banana.png" alt="Banana">
 
 </div>
@@ -61,7 +61,7 @@ Sign Up
 
 <script>
 
-// -- sounds --
+// Preloads all game sound effects for immediate playback.
 
 const sounds = {
 
@@ -73,7 +73,7 @@ timeup: new Audio("assets/sfx/timeup.wav")
 };
 
 
-// plays our sounds
+// Plays a requested sound effect and resets its playback position to start.
 
 function playSound(name){
 
@@ -97,7 +97,7 @@ console.warn("Audio play failed:", error);
 }
 
 
-// -- button clicks --
+// Hooks up click events to elements using element IDs.
 
 const loginBtn = document.getElementById("goLogin");
 const signupBtn = document.getElementById("goSignup");
@@ -121,11 +121,12 @@ signupBtn.addEventListener("click", () => {
 
 <script type="module">
   import { initBackgroundMusic } from "./sound.js";
-  // The moment the user clicks anywhere on the index page, init the background music
+  // Initializes background music upon the user's first interaction with the page.
   document.body.addEventListener("click", () => {
     initBackgroundMusic();
   }, { once: true });
 </script>
 
+<script type="module" src="mute.js"></script>
 </body>
 </html>

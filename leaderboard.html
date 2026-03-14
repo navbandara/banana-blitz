@@ -7,37 +7,38 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="bg">
-  <!-- Everything lives in here -->
+  <!-- Main layout container for the page content. -->
   <div class="page">
     
-    <!-- Go back arrow -->
+    <!-- Navigates the user back to the main menu. -->
     <button class="backBtn" onclick="location.href='menufile.html'">←</button>
 
-    <!-- The smaller logo & title up top -->
+    <!-- Displays the compact version of the logo and title. -->
     <header class="topBrand small">
       <h1 class="title">BANANA <span>BLITZ</span></h1>
       <p class="subtitle">Leaderboard</p>
     </header>
 
-    <!-- The main box showing the top scores -->
+    <!-- Container presenting the list of highest-ranking players. -->
     <main class="card">
       
-      <!-- The column headers -->
+      <!-- Header row defining the data columns. -->
       <div class="tableHead">
         <span>Rank</span>
         <span>Player</span>
         <span>Score</span>
       </div>
       
-      <!-- The actual rows get injected here -->
+      <!-- Container where retrieved leaderboard records are dynamically inserted. -->
       <div id="leaderboardList" class="tableBody"></div>
       
-      <!-- E.g. "Loading..." or error messages -->
+      <!-- Container for displaying status or error messages regarding data retrieval. -->
       <p class="msg center" id="lbMsg"></p>
     </main>
   </div>
 
   <script type="module" src="app.js"></script>
   <script type="module" src="leaderboard.js"></script>
+<script type="module" src="mute.js"></script>
 </body>
 </html>
