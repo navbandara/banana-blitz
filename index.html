@@ -104,30 +104,27 @@ const signupBtn = document.getElementById("goSignup");
 
 
 loginBtn.addEventListener("click", () => {
-
-playSound("click");
-
-setTimeout(() => {
-
-location.href = "login.html";
-
-},150);
-
+  playSound("click");
+  setTimeout(() => {
+    location.href = "login.html";
+  },150);
 });
-
 
 signupBtn.addEventListener("click", () => {
-
-playSound("click");
-
-setTimeout(() => {
-
-location.href = "signup.html";
-
-},150);
-
+  playSound("click");
+  setTimeout(() => {
+    location.href = "signup.html";
+  },150);
 });
 
+</script>
+
+<script type="module">
+  import { initBackgroundMusic } from "./sound.js";
+  // The moment the user clicks anywhere on the index page, init the background music
+  document.body.addEventListener("click", () => {
+    initBackgroundMusic();
+  }, { once: true });
 </script>
 
 </body>

@@ -24,3 +24,46 @@ export function playSound(name){
     });
   }
 }
+
+// Background music setup
+let bgMusic = null;
+
+// Use a free API / public domain audio URL
+// Example using a public domain chiptune track from an open source library:
+const BG_MUSIC_URL = "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=8-bit-arcade-138828.mp3"; 
+
+export function initBackgroundMusic() {
+  if (bgMusic) return;
+
+  bgMusic = new Audio(BG_MUSIC_URL);
+  bgMusic.loop = true;
+  bgMusic.volume = 0.3; // keep it subtle so the sound effects are louder
+
+  // check if we have a saved time in sessionStorage
+  const savedTime = sessionStorage.getItem("bgMusicTime");
+  if (savedTime) {
+    bgMusic.currentTime = parseFloat(savedTime);
+  }
+
+  // Every second, save the current time so it persists across page loads
+  setInterval(() => {
+    if (bgMusic && !bgMusic.paused) {
+      sessionStorage.setItem("bgMusicTime", bgMusic.currentTime);
+    }
+  }, 1000);
+
+  // Play immediately (browsers might block this until user interaction)
+  const playPromise = bgMusic.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.warn("Autoplay was prevented. Waiting for user interaction.", error);
+    });
+  }
+}
+
+// Ensure audio plays when the user interacts with the page (fixes autoplay policies)
+document.addEventListener("click", () => {
+  if (bgMusic && bgMusic.paused) {
+    bgMusic.play().catch(() => {});
+  }
+}, { once: true });
