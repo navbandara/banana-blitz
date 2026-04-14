@@ -1,97 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Game - Banana Blitz</title>
+    <title>Game - Banana Blitz</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body class="bg">
 
-<!-- Main layout container for the page content. -->
-<div class="page">
+    <!-- Main layout container for the page content. -->
+    <div class="page">
 
-<!-- Navigates the user back to the main menu or previous page. -->
-<button class="backBtn" id="backBtn">←</button>
-
-
-<!-- Header displaying the active game mode and remaining time. -->
-<header class="gameTop">
-
-<div class="pill" id="modePill">
-BANANA PUZZLE
-</div>
-
-<div class="timerPill">
-⏱ <span id="timer">60</span>
-</div>
-
-</header>
+        <!-- Navigates the user back to the main menu or previous page. -->
+        <button class="backBtn" id="backBtn">←</button>
 
 
-<!-- Central card area containing the active gameplay elements. -->
-<main class="gameArea card">
+        <!-- Header displaying the active game mode and remaining time. -->
+        <header class="gameTop">
 
-<!-- Header displaying the current question or loading status. -->
-<h2 class="h2 center" id="questionText">
-Solve the Banana Puzzle
-</h2>
+            <div class="pill" id="modePill">
+                BANANA PUZZLE
+            </div>
 
+            <div class="timerPill">
+                ⏱ <span id="timer">60</span>
+            </div>
 
-<!-- Container for rendering the dynamic puzzle image. -->
-<div class="puzzleBox center">
-
-<img 
-id="bananaImage"
-class="bananaImg"
-src=""
-alt="Banana Puzzle"
-width="260">
-
-</div>
+        </header>
 
 
-<!-- Read-only input field displaying the currently typed answer. -->
-<div class="answerBox">
+        <!-- Central card area containing the active gameplay elements. -->
+        <main class="gameArea card">
 
-<input
-class="input answerInput"
-id="answerInput"
-type="text"
-maxlength="1"
-placeholder="0"
-readonly>
-
-</div>
+            <!-- Header displaying the current question or loading status. -->
+            <h2 class="h2 center" id="questionText">
+                Solve the Banana Puzzle
+            </h2>
 
 
-<!-- Container where the numeric keypad buttons are dynamically inserted. -->
-<div class="keypad" id="keypad"></div>
+            <!-- Container for rendering the dynamic puzzle image. -->
+            <div class="puzzleBox center">
+
+                <img id="bananaImage" class="bananaImg" src="" alt="Banana Puzzle" width="260">
+
+            </div>
 
 
-<!-- Submits the user's current answer for validation. -->
-<button class="btn btn-green full" id="submitBtn">
-Submit ✅
-</button>
+            <!-- Read-only input field displaying the currently typed answer. -->
+            <div class="answerBox">
+
+                <input class="input answerInput" id="answerInput" type="text" maxlength="1" placeholder="0" readonly>
+
+            </div>
 
 
-<!-- Field for displaying answer validation feedback to the user. -->
-<p class="msg center" id="feedback"></p>
+            <!-- Container where the numeric keypad buttons are dynamically inserted. -->
+            <div class="keypad" id="keypad"></div>
 
 
-</main>
+            <!-- Submits the user's current answer for validation. -->
+            <button class="btn btn-green full" id="submitBtn">
+                Submit ✅
+            </button>
 
-</div>
+
+            <!-- Field for displaying answer validation feedback to the user. -->
+            <p class="msg center" id="feedback"></p>
 
 
-<!-- Imports and executes the core game logic module. -->
-<script type="module" src="game.js"></script>
+        </main>
 
-<script type="module" src="mute.js"></script>
+    </div>
+
+
+    <!-- Imports and executes the core game logic module. -->
+    <script type="module" src="game.js"></script>
+
+    <script type="module" src="mute.js"></script>
+    <script src="meal.js"></script>
 </body>
+
 </html>

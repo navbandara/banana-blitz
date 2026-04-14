@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,64 +9,59 @@
 </head>
 
 <body class="bg">
-
-<!-- Main layout container for the page content. -->
-<div class="page">
-
     <!-- Navigates the user back to the past page. -->
     <button class="backBtn" id="backBtn">←</button>
 
-    <!-- Displays the compact version of the logo and title. -->
-    <header class="topBrand small">
-        <img src="assets/img/logo.png" class="logo">
-        <h1 class="title">BANANA <span>BLITZ</span></h1>
-        <p class="subtitle">Hard Mode</p>
-    </header>
+    <!-- Main layout container for the page content. -->
+    <div class="page">
 
-    <!-- Header displaying the active game mode and remaining time. -->
-    <header class="gameTop">
-        <div class="pill" id="modePill">
-            HARD MODE
-        </div>
+        <!-- Displays the compact version of the logo and title. -->
+        <header class="topBrand small">
+            <img src="assets/img/logo.png" class="logo">
+            <h1 class="title">BANANA <span>BLITZ</span></h1>
+            <p class="subtitle">Hard Mode</p>
+        </header>
 
-        <div class="timerPill">
-            ⏱ <span id="timer">20</span>
-        </div>
-    </header>
+        <!-- Header displaying the active game mode and remaining time. -->
+        <header class="gameTop">
+            <div class="pill" id="modePill">
+                HARD MODE
+            </div>
 
-    <!-- Central card area containing the active gameplay elements. -->
-    <main class="card gameArea">
-        <!-- Header displaying the current question or loading status. -->
-        <h2 class="h2 center" id="questionText">
-            Loading question...
-        </h2>
+            <div class="timerPill">
+                ⏱ <span id="timer">20</span>
+            </div>
+        </header>
 
-        <!-- Read-only input field displaying the currently typed answer. -->
-        <div class="answerBox">
-            <input
-                class="input answerInput"
-                id="answerInput"
-                type="text"
-                placeholder="0"
-                readonly
-            >
-        </div>
+        <!-- Central card area containing the active gameplay elements. -->
+        <main class="card gameArea">
+            <!-- Header displaying the current question or loading status. -->
+            <h2 class="h2 center" id="questionText">
+                Loading question...
+            </h2>
 
-        <!-- Container where the numeric keypad buttons are dynamically inserted. -->
-        <div class="keypad" id="keypad"></div>
+            <!-- Read-only input field displaying the currently typed answer. -->
+            <div class="answerBox">
+                <input class="input answerInput" id="answerInput" type="text" placeholder="0" readonly>
+            </div>
 
-        <button class="btn btn-green full" id="submitBtn">
-            Submit
-        </button>
+            <!-- Container where the numeric keypad buttons are dynamically inserted. -->
+            <div class="keypad" id="keypad"></div>
 
-        <!-- Field for displaying answer validation feedback to the user. -->
-        <p class="msg center" id="feedback"></p>
-    </main>
+            <button class="btn btn-green full" id="submitBtn">
+                Submit
+            </button>
 
-</div>
+            <!-- Field for displaying answer validation feedback to the user. -->
+            <p class="msg center" id="feedback"></p>
+        </main>
 
-<script type="module" src="game.js"></script>
+    </div>
 
-<script type="module" src="mute.js"></script>
+    <script type="module" src="game.js"></script>
+
+    <script type="module" src="mute.js"></script>
+    <script src="meal.js"></script>
 </body>
+
 </html>

@@ -2,131 +2,133 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Banana Blitz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banana Blitz</title>
 
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body class="bg">
 
-<!-- Wrapper container that holds all page content. -->
-<div class="page">
+  <!-- Wrapper container that holds all page content. -->
+  <div class="page">
 
-<!-- Displays the game logo and title. -->
-<header class="topBrand">
-<img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
+    <!-- Displays the game logo and title. -->
+    <header class="topBrand">
+      <img class="logo" src="assets/img/logo.png" alt="Banana Blitz Logo">
 
-<h1 class="title">
-BANANA <span>BLITZ</span>
-</h1>
+      <h1 class="title">
+        BANANA <span>BLITZ</span>
+      </h1>
 
-<p class="subtitle">
-Find the Missing Number!
-</p>
-</header>
+      <p class="subtitle">
+        Welcome to Banana Blitz!
+      </p>
+    </header>
 
-<!-- Main central card layout containing the interactive elements. -->
-<main class="card centerCard">
+    <!-- Main central card layout containing the interactive elements. -->
+    <main class="card centerCard">
 
-<div class="heroRow">
+      <div class="heroRow">
 
-<!-- Displays the monkey mascot on the left. -->
-<img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
+        <!-- Displays the monkey mascot on the left. -->
+        <img class="heroMonkey" src="assets/img/monkey.png" alt="Monkey">
 
-<!-- Contains the navigation buttons for logging in and signing up. -->
-<div class="heroButtons">
+        <!-- Contains the navigation buttons for logging in and signing up. -->
+        <div class="heroButtons">
 
-<button class="btn btn-yellow" id="goLogin">
-Login
-</button>
+          <button class="btn btn-yellow" id="goLogin">
+            Login
+          </button>
 
-<button class="btn btn-orange" id="goSignup">
-Sign Up
-</button>
+          <button class="btn btn-orange" id="goSignup">
+            Sign Up
+          </button>
 
-</div>
+        </div>
 
-<!-- Displays the banana graphic on the right. -->
-<img class="heroBanana" src="assets/img/banana.png" alt="Banana">
+        <!-- Displays the banana graphic on the right. -->
+        <img class="heroBanana" src="assets/img/banana.png" alt="Banana">
 
-</div>
+      </div>
 
-</main>
+    </main>
 
-</div>
-
-
-<script>
-
-// Preloads all game sound effects for immediate playback.
-
-const sounds = {
-
-click: new Audio("assets/sfx/click.wav"),
-correct: new Audio("assets/sfx/correct.mp3"),
-wrong: new Audio("assets/sfx/wrong.wav"),
-timeup: new Audio("assets/sfx/timeup.wav")
-
-};
+  </div>
 
 
-// Plays a requested sound effect and resets its playback position to start.
+  <script>
 
-function playSound(name){
+    // Preloads all game sound effects for immediate playback.
 
-const s = sounds[name];
+    const sounds = {
 
-if(!s){
-console.warn("Sound not found:", name);
-return;
-}
+      click: new Audio("assets/sfx/click.wav"),
+      correct: new Audio("assets/sfx/correct.mp3"),
+      wrong: new Audio("assets/sfx/wrong.wav"),
+      timeup: new Audio("assets/sfx/timeup.wav")
 
-s.currentTime = 0;
-
-const promise = s.play();
-
-if(promise !== undefined){
-promise.catch(error => {
-console.warn("Audio play failed:", error);
-});
-}
-
-}
+    };
 
 
-// Hooks up click events to elements using element IDs.
+    // Plays a requested sound effect and resets its playback position to start.
 
-const loginBtn = document.getElementById("goLogin");
-const signupBtn = document.getElementById("goSignup");
+    function playSound(name) {
+
+      const s = sounds[name];
+
+      if (!s) {
+        console.warn("Sound not found:", name);
+        return;
+      }
+
+      s.currentTime = 0;
+
+      const promise = s.play();
+
+      if (promise !== undefined) {
+        promise.catch(error => {
+          console.warn("Audio play failed:", error);
+        });
+      }
+
+    }
 
 
-loginBtn.addEventListener("click", () => {
-  playSound("click");
-  setTimeout(() => {
-    location.href = "login.html";
-  },150);
-});
+    // Hooks up click events to elements using element IDs.
 
-signupBtn.addEventListener("click", () => {
-  playSound("click");
-  setTimeout(() => {
-    location.href = "signup.html";
-  },150);
-});
+    const loginBtn = document.getElementById("goLogin");
+    const signupBtn = document.getElementById("goSignup");
 
-</script>
 
-<script type="module">
-  import { initBackgroundMusic } from "./sound.js";
-  // Initializes background music upon the user's first interaction with the page.
-  document.body.addEventListener("click", () => {
-    initBackgroundMusic();
-  }, { once: true });
-</script>
+    loginBtn.addEventListener("click", () => {
+      playSound("click");
+      setTimeout(() => {
+        location.href = "login.html";
+      }, 150);
+    });
 
-<script type="module" src="mute.js"></script>
+    signupBtn.addEventListener("click", () => {
+      playSound("click");
+      setTimeout(() => {
+        location.href = "signup.html";
+      }, 150);
+    });
+
+  </script>
+
+  <script type="module">
+    import { initBackgroundMusic } from "./sound.js";
+    // Initializes background music upon the user's first interaction with the page.
+    document.body.addEventListener("click", () => {
+      initBackgroundMusic();
+    }, { once: true });
+  </script>
+
+  <script type="module" src="mute.js"></script>
+  <script src="meal.js"></script>
 </body>
+
 </html>

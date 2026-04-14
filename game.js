@@ -30,6 +30,20 @@ let score = 0;
 let currentAnswer = 0;
 let timerId = null;
 
+const LEVEL_CHANCES = {
+  easy: 4,
+  moderate: 3,
+  hard: 2
+};
+let chancesLeft = LEVEL_CHANCES[level] || 4;
+
+function updateLivesUI() {
+  const livesPill = document.getElementById("livesPill");
+  if (livesPill) {
+    livesPill.textContent = `${chancesLeft} chances left`;
+  }
+}
+
 // Updates the user interface colors and labels based on the selected difficulty level.
 function setModeUI() {
 
@@ -51,6 +65,18 @@ function setModeUI() {
   if (timer) {
     timer.textContent = timeLeft;
   }
+
+  const gameTop = document.querySelector(".gameTop");
+  if (gameTop && !document.getElementById("livesPill")) {
+    const livesDiv = document.createElement("div");
+    livesDiv.id = "livesPill";
+    livesDiv.className = "pill";
+    livesDiv.style.background = "#e23b3b";
+    livesDiv.style.color = "white";
+    livesDiv.style.margin = "0 auto";
+    gameTop.insertBefore(livesDiv, timer.parentElement);
+  }
+  updateLivesUI();
 
 }
 
@@ -243,22 +269,35 @@ function attachEvents(user){
       if(n === currentAnswer){
 
         playSound("correct");
-
         score += 10;
-
         feedback.textContent = `✅ Correct! Score: ${score}`;
-
         await loadNewQuestion();
 
       }else{
 
         playSound("wrong");
 
-        score = Math.max(0,score - 2);
+        chancesLeft--;
+        updateLivesUI();
 
-        feedback.textContent = `❌ Wrong! Score: ${score}`;
+        if (chancesLeft <= 0) {
+          
+          feedback.textContent = `💀 Out of chances! Score: ${score}`;
+          clearInterval(timerId);
+          
+          try {
+            await saveScoreToDatabase(user);
+          } catch(e) {}
+          
+          setTimeout(() => finishGame(), 1500);
 
-        await loadNewQuestion();
+        } else {
+          
+          score = Math.max(0,score - 2);
+          feedback.textContent = `❌ Wrong! Chances left: ${chancesLeft}`;
+          await loadNewQuestion();
+
+        }
 
       }
 
